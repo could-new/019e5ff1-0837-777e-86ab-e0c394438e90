@@ -64,101 +64,108 @@ class MethodologyFlowchart extends StatelessWidget {
       children: [
         const Text(
           'Methodology Flowchart',
-          style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, letterSpacing: 1.2),
+          style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, letterSpacing: 1.2),
         ),
-        const SizedBox(height: 40),
+        const SizedBox(height: 50),
+        
+        // Phase 1: Bead Preparation
+        const _SectionTitle('Phase 1: Bead Preparation'),
+        const SizedBox(height: 20),
+        const BoxWidget('Selection of Raw Materials'),
+        const ArrowDown(),
+        const BoxWidget('Washing'),
+        const ArrowDown(),
+        const BoxWidget('Slicing'),
+        const ArrowDown(),
+        const BoxWidget('Soaking in 0.5% CaCl₂'),
+        const ArrowDown(),
+        const BoxWidget('Draining'),
+        const ArrowDown(),
+        const BoxWidget('Rinsing in Distilled Water'),
+        const ArrowDown(),
+        const BoxWidget('Grinding'),
+        const ArrowDown(),
+        const BoxWidget('Vitamin C Extraction'),
+        const ArrowDown(height: 20),
+        
+        // Fork for variations
+        CustomPaint(
+          size: const Size(360, 20),
+          painter: ForkPainter(),
+        ),
         Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Left Branch: Bead Preparation
-            Column(
-              children: [
-                const BoxWidget('Selection of Raw Materials'),
-                const ArrowDown(),
-                const BoxWidget('Washing'),
-                const ArrowDown(),
-                const BoxWidget('Slicing'),
-                const ArrowDown(),
-                const BoxWidget('Soaking in 0.5% CaCl₂'),
-                const ArrowDown(),
-                const BoxWidget('Draining'),
-                const ArrowDown(),
-                const BoxWidget('Rinsing in Distilled Water'),
-                const ArrowDown(),
-                const BoxWidget('Grinding'),
-                const ArrowDown(),
-                const BoxWidget('Vitamin C Extraction'),
-                const ArrowDown(height: 20),
-                
-                // Fork for variations
-                CustomPaint(
-                  size: const Size(360, 20),
-                  painter: ForkPainter(),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const BoxWidget('Variation 1\n25 g', width: 100),
-                    const SizedBox(width: 20),
-                    const BoxWidget('Variation 2\n50 g', width: 100),
-                    const SizedBox(width: 20),
-                    const BoxWidget('Variation 3\n75 g', width: 100),
-                  ],
-                ),
-                CustomPaint(
-                  size: const Size(360, 20),
-                  painter: MergePainter(),
-                ),
-                const ArrowDown(height: 20),
-                
-                const BoxWidget('Extraction'),
-                const ArrowDown(),
-                const BoxWidget('Selection of Best Yield'),
-                const ArrowDown(),
-                const BoxWidget('Quantification'),
-                const ArrowDown(),
-                const BoxWidget('Encapsulation'),
-                const ArrowDown(),
-                const BoxWidget('Encapsulation Matrix:\nPectin + Orange Peel Solution'),
-                const ArrowDown(),
-                const BoxWidget('Hardening the Beads in CaCl₂'),
-                const ArrowDown(),
-                const BoxWidget('Washing and Storage'),
-                const ArrowDown(height: 50), // Extends down to merge
-              ],
-            ),
-            
-            const SizedBox(width: 80), // Space between branches
-            
-            // Right Branch: Juice Fermentation
-            Column(
-              children: [
-                const BoxWidget('Fermentation of Bilimbi Juice\n(100 ml)'),
-                const ArrowDown(),
-                const BoxWidget('Bilimbi Juice + 80 ml Water'),
-                const ArrowDown(),
-                const BoxWidget('10 ml Mint Juice + 25 g Monk Sugar'),
-                const ArrowDown(),
-                const BoxWidget('Store at Room Temperature\nfor 24 Hours'),
-                const ArrowDown(),
-                const BoxWidget('Store in Refrigerator\nfor 3–4 Days'),
-                
-                // A long arrow or spacing to match the height of the left branch
-                const ArrowDown(height: 580),
-              ],
-            ),
+            const BoxWidget('Variation 1\n25 g', width: 110),
+            const SizedBox(width: 15),
+            const BoxWidget('Variation 2\n50 g', width: 110),
+            const SizedBox(width: 15),
+            const BoxWidget('Variation 3\n75 g', width: 110),
           ],
         ),
-        
-        // Final Merge Step
         CustomPaint(
-          size: const Size(380, 40),
-          painter: FinalMergePainter(),
+          size: const Size(360, 20),
+          painter: MergePainter(),
         ),
         const ArrowDown(height: 20),
-        const BoxWidget('Add Encapsulated Beads\n(Final Product)', width: 250, isFinal: true),
+        
+        const BoxWidget('Extraction'),
+        const ArrowDown(),
+        const BoxWidget('Selection of Best Yield'),
+        const ArrowDown(),
+        const BoxWidget('Quantification'),
+        const ArrowDown(),
+        const BoxWidget('Encapsulation'),
+        const ArrowDown(),
+        const BoxWidget('Encapsulation Matrix:\nPectin + Orange Peel Solution'),
+        const ArrowDown(),
+        const BoxWidget('Hardening the Beads in CaCl₂'),
+        const ArrowDown(),
+        const BoxWidget('Washing and Storage'),
+        
+        const SizedBox(height: 60),
+        
+        // Phase 2: Fermentation
+        const _SectionTitle('Phase 2: Juice Fermentation'),
+        const SizedBox(height: 20),
+        const BoxWidget('Fermentation of Bilimbi Juice (100 ml)'),
+        const ArrowDown(),
+        const BoxWidget('Bilimbi Juice + 80 ml Water'),
+        const ArrowDown(),
+        const BoxWidget('10 ml Mint Juice + 25 g Monk Sugar'),
+        const ArrowDown(),
+        const BoxWidget('Store at Room Temperature\nfor 24 Hours'),
+        const ArrowDown(),
+        const BoxWidget('Store in Refrigerator\nfor 3–4 Days'),
+        
+        const SizedBox(height: 60),
+        
+        // Phase 3: Final Product
+        const _SectionTitle('Phase 3: Final Assembly'),
+        const SizedBox(height: 20),
+        const ArrowDown(height: 40),
+        const BoxWidget('Add Encapsulated Beads\n(Final Product)', width: 300, isFinal: true),
       ],
+    );
+  }
+}
+
+class _SectionTitle extends StatelessWidget {
+  final String title;
+  const _SectionTitle(this.title);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      decoration: BoxDecoration(
+        color: Colors.grey.shade200,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Text(
+        title,
+        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black87),
+      ),
     );
   }
 }
@@ -173,21 +180,22 @@ class BoxWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width,
-      padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
+      width: width >= 250 ? 280 : width, // slightly wider default for readability
+      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 18),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: isFinal ? Colors.black : Colors.black87, width: isFinal ? 2.5 : 1.5),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: isFinal ? Colors.black : Colors.black87, width: isFinal ? 3.0 : 1.5),
         boxShadow: const [
-          BoxShadow(color: Colors.black12, blurRadius: 4, offset: Offset(0, 2)),
+          BoxShadow(color: Colors.black12, blurRadius: 6, offset: Offset(0, 3)),
         ],
       ),
       child: Text(
         text,
         textAlign: TextAlign.center,
         style: TextStyle(
-          fontSize: 14,
+          fontSize: 15, // slightly larger
+
           fontWeight: isFinal ? FontWeight.bold : FontWeight.w500,
           color: Colors.black87,
           height: 1.3,
